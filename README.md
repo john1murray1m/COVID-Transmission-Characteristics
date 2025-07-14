@@ -1,5 +1,7 @@
 Characteristics of SARS-CoV-2 transmission in Australia
+
 John M. Murray & Elma H. Akand
+
 School of Mathematics and Statistics, UNSW Sydney, NSW 2052, Australia
 
 This project uses SARS-CoV-2 transmission networks previously calculated (github files: https://github.com/john1murray1m/SARS-COV-2-Transmission-Networks),
