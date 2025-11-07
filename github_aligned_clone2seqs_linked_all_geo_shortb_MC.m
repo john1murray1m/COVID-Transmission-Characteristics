@@ -137,16 +137,16 @@ for imc=1:nmc
     
                 %% calculate the network of seqs
                 Gopt_seqs=clone2seqs_geo(Gopt,seqa,Cclone,iclone,T_GN,lama,lamd);
-                outd=outdegree(Gopt_seqs);
-                harry=str2double(string(Gopt_seqs.Nodes.Name));
-                for i=1:height(T_GN)               
-                    ii2=harry==iseq(i);
-                    if any(ii2)
-                        T_GN{i,'OutDegree'}=outd(ii2);
-                    else
-                        T_GN{i,'OutDegree'}=NaN;
-                    end
-                end
+      %         outd=outdegree(Gopt_seqs);
+      %         harry=str2double(string(Gopt_seqs.Nodes.Name));
+      %         for i=1:height(T_GN)               
+      %              ii2=harry==iseq(i);
+      %              if any(ii2)
+      %                  T_GN{i,'OutDegree'}=outd(ii2);
+      %              else
+      %                  T_GN{i,'OutDegree'}=NaN;
+      %              end
+      %          end
                         
     
     
@@ -162,7 +162,18 @@ for imc=1:nmc
                 ii1=find(Gopt_seqs.Edges.Within==0); % the edges between clones, their should be only one between any two
                 [~,iid]=unique(Gopt_seqs.Edges{ii1,{'C1','C2'}},'rows');
                 Gopt_seqs=rmedge(Gopt_seqs,setdiff(ii1,ii1(iid)));
-    
+
+                outd=outdegree(Gopt_seqs);
+                harry=str2double(string(Gopt_seqs.Nodes.Name));
+                for i=1:height(T_GN)               
+                    ii2=harry==iseq(i);
+                    if any(ii2)
+                        T_GN{i,'OutDegree'}=outd(ii2);
+                    else
+                        T_GN{i,'OutDegree'}=NaN;
+                    end
+                end
+                
                 % figure(figcount+100)
                 % clf
                 % popt=plot(Gopt_seqs,'NodeLabel',Gopt_seqs.Nodes.Name,'EdgeLabel',mod(Gopt_seqs.Edges.Mut_Dist,1000));
@@ -459,3 +470,4 @@ end
 save('save_align_link_all_noany_geo_shortb_MC','Lam',"MC_out_tabs",...
     'T_outd_NSW','T_outd_VIC','T_outd_AUS',"Out0_perc",'T_outd_edge_VIC',...
     'T_outd_edge_NSW')
+
